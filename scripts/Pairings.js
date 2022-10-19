@@ -3,26 +3,28 @@ import { getChildren, getCelebrities } from "./database.js"
 const kids = getChildren()
 const celebrities = getCelebrities()
 
-const findCelebrityMatch = (kidObject, celebrityArray) => {
-    let celebrity = null
+const findCelebrityMatch = (kids, celebrities) => {
+    let matchedCelebrity = null
 
-    for (const celebrity of celebrityArray) {
-
+    for (const celebrity of celebrities) {
+        if (celebrity.id === kids.celebrityId) {
+            matchedCelebrity = celebrity
+        }
     }
 
-    return celebritiy
+    return matchedCelebrity
 }
 
 export const Pairings = () => {
     let html = ""
-    html = "<ul>"
+    html += "<ul>"
 
     for (const kid of kids) {
         const kidsStar = findCelebrityMatch(kid, celebrities)
         html += `
             <li>
-                ${kid.name} will be making memories with ${kidsStar.name}, a ${kidsStar.Sport} star, by ${kid.wish}
-            </li>
+                ${kid.name} will be making memories with ${kidsStar.name}, a ${kidsStar.sport} star, by ${kid.wish}.
+                </li>
         `
     }
 
@@ -30,4 +32,3 @@ export const Pairings = () => {
 
     return html
 }
-
